@@ -1,0 +1,71 @@
+{
+  "expo": {
+    "name": "Custom Chess",
+    "slug": "custom-chess-ios",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "customchess",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "buildNumber": "4",
+      "supportsTablet": true,
+      "bundleIdentifier": "com.customchess.app",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Upload family photos as your chess pieces",
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "versionCode": 11,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#1a1a2e"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.customchess.app",
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png",
+      "name": "Custom Chess",
+      "shortName": "Custom Chess",
+      "description": "Play chess with your family photos as pieces! Upload custom images for each chess piece and battle your loved ones on the board.",
+      "backgroundColor": "#1a1a2e",
+      "themeColor": "#E8D5B7",
+      "lang": "en"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-image.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#1a1a2e"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Upload family photos to use as your custom chess pieces"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d3f8ce7a-3e8f-4ea2-9351-16cf2d6ba4b4"
+      }
+    }
+  }
+}
