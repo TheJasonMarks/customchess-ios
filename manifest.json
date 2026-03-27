@@ -1,0 +1,19 @@
+{
+  "name": "Custom Chess",
+  "short_name": "C.C.",
+  "description": "Play chess with any photos! Use family pictures, nature or arts as your own chess pieces!",
+  "id": "/custom-chess",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F94230",
+  "theme_color": "#F94230",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/assets/images/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
