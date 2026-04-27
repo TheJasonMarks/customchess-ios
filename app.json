@@ -1,15 +1,15 @@
 {
   "expo": {
     "name": "Custom Chess",
-    "slug": "custom-chess-ios",
-    "version": "1.0.0",
+    "slug": "custom-chess",
+    "version": "1.0.6",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "customchess",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "buildNumber": "4",
+      "buildNumber": "18",
       "supportsTablet": true,
       "bundleIdentifier": "com.customchess.app",
       "infoPlist": {
@@ -18,7 +18,7 @@
       }
     },
     "android": {
-      "versionCode": 11,
+      "versionCode": 27,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#1a1a2e"
@@ -64,7 +64,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "d3f8ce7a-3e8f-4ea2-9351-16cf2d6ba4b4"
+        "projectId": "a1574cb9-e67f-48f3-bbf3-1e4e5171353c"
       }
     }
   }

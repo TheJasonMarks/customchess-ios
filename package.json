@@ -1,18 +1,18 @@
 {
-  "name": "frontend",
+  "name": "@workspace/custom-chess",
+  "version": "0.0.0",
+  "private": true,
   "main": "expo-router/entry",
-  "version": "1.0.0",
   "scripts": {
-    "start": "expo start",
-    "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "lint": "expo lint"
+    "dev": "EXPO_PACKAGER_PROXY_URL=https://$REPLIT_EXPO_DEV_DOMAIN EXPO_PUBLIC_DOMAIN=$REPLIT_DEV_DOMAIN EXPO_PUBLIC_REPL_ID=$REPL_ID REACT_NATIVE_PACKAGER_HOSTNAME=$REPLIT_DEV_DOMAIN pnpm exec expo start --localhost --port $PORT",
+    "build": "node scripts/build.js",
+    "serve": "node server/serve.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
     "@babel/runtime": "^7.20.6",
-    "@expo/metro-runtime": "^6.1.2",
+    "@expo/cli": "54.0.23",
     "@expo/ngrok": "^4.1.3",
     "@expo/vector-icons": "^15.0.3",
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -20,6 +20,7 @@
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.6",
     "@react-navigation/native-stack": "^7.3.10",
+    "@types/react": "~19.1.10",
     "chess.js": "^1.4.0",
     "expo": "54.0.33",
     "expo-av": "^16.0.8",
@@ -46,18 +47,10 @@
     "react-native-reanimated": "~4.1.1",
     "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.16.0",
-    "react-native-svg": "15.12.1",
+    "react-native-svg": "^15.15.4",
     "react-native-web": "^0.21.0",
     "react-native-webview": "13.15.0",
-    "react-native-worklets": "0.5.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@types/react": "~19.1.0",
-    "eslint": "^9.25.0",
-    "eslint-config-expo": "~10.0.0",
-    "typescript": "~5.9.3"
-  },
-  "private": true,
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+    "react-native-worklets": "0.5.1",
+    "typescript": "~5.9.2"
+  }
 }
