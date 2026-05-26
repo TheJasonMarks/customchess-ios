@@ -33,7 +33,7 @@ const PRODUCTS = {
   PREMIUM_UNLOCK: {
     id: 'premium_unlock',
     name: 'Premium Bundle',
-    description: 'All themes, harder AI, custom pieces, letter overlays, no ads',
+    description: '🚀 Alien Speed bonus game, all themes, harder AI, custom pieces, letter overlays, no ads',
     price: 4.99,
   },
   CUSTOMIZATION_ONLY: {

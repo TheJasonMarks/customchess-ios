@@ -15,6 +15,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BOARD_THEMES, BoardTheme, DEFAULT_THEME } from '../src/utils/themes';
 import { usePurchases } from '../src/contexts/PurchaseContext';
@@ -120,15 +121,23 @@ export default function CustomizeScreen() {
         mediaTypes: ['images'],
         allowsEditing: true,
         aspect: [1, 1],
-        quality: 0.7,
-        base64: true,
+        quality: 0.5,
+        base64: false,
       });
 
-      if (!result.canceled && result.assets[0].base64) {
-        const base64Image = `data:image/jpeg;base64,${result.assets[0].base64}`;
+      if (!result.canceled && result.assets[0].uri) {
+        const uri = result.assets[0].uri;
+        const dir = FileSystem.documentDirectory + 'chess_pieces/';
+        const dirInfo = await FileSystem.getInfoAsync(dir);
+        if (!dirInfo.exists) {
+          await FileSystem.makeDirectoryAsync(dir, { intermediates: true });
+        }
+        const fileName = `${pieceKey}_${Date.now()}.jpg`;
+        const destPath = dir + fileName;
+        await FileSystem.copyAsync({ from: uri, to: destPath });
         setCurrentPieces(prev => ({
           ...prev,
-          [pieceKey]: base64Image,
+          [pieceKey]: destPath,
         }));
       }
     } catch (error) {

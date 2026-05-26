@@ -21,8 +21,7 @@ import { BOARD_THEMES, BoardTheme, DEFAULT_THEME } from '../src/utils/themes';
 import { getBestMove, Difficulty } from '../src/utils/chessAI';
 import { soundManager } from '../src/utils/soundManager';
 import { usePurchases } from '../src/contexts/PurchaseContext';
-import InterstitialAd from '../src/components/InterstitialAd';
-import RewardedAd from '../src/components/RewardedAd';
+import { initAds, handleRestartRequest, handleUndoRequest } from '../src/lib/adManager';
 
 const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
 const { width, height } = Dimensions.get('window');
@@ -121,6 +120,7 @@ export default function GameScreen() {
       loadPieceSet();
     }
     soundManager.loadSounds();
+    initAds();
     
     return () => {
       if (timerRef.current) {
@@ -558,22 +558,29 @@ export default function GameScreen() {
     }
   };
 
+  const performReset = () => {
+    chess.reset();
+    setBoard(chess.board());
+    setSelectedSquare(null);
+    setValidMoves([]);
+    setGameStatus('in_progress');
+    setMoveHistory([]);
+    setCapturedPieces({ white: [], black: [] });
+    const initialTime = TIME_CONTROLS[timeControl] || 0;
+    setWhiteTime(initialTime);
+    setBlackTime(initialTime);
+    soundManager.playGameStart();
+    saveGame();
+  };
+
   const resetGame = () => {
-    // Use confirm for web compatibility
+    const confirmAndReset = () => {
+      handleRestartRequest(performReset);
+    };
+
     if (Platform.OS === 'web') {
       if (confirm('Are you sure you want to start a new game?')) {
-        chess.reset();
-        setBoard(chess.board());
-        setSelectedSquare(null);
-        setValidMoves([]);
-        setGameStatus('in_progress');
-        setMoveHistory([]);
-        setCapturedPieces({ white: [], black: [] });
-        const initialTime = TIME_CONTROLS[timeControl] || 0;
-        setWhiteTime(initialTime);
-        setBlackTime(initialTime);
-        soundManager.playGameStart();
-        saveGame();
+        confirmAndReset();
       }
     } else {
       Alert.alert(
@@ -584,32 +591,19 @@ export default function GameScreen() {
           {
             text: 'Reset',
             style: 'destructive',
-            onPress: () => {
-              chess.reset();
-              setBoard(chess.board());
-              setSelectedSquare(null);
-              setValidMoves([]);
-              setGameStatus('in_progress');
-              setMoveHistory([]);
-              setCapturedPieces({ white: [], black: [] });
-              const initialTime = TIME_CONTROLS[timeControl] || 0;
-              setWhiteTime(initialTime);
-              setBlackTime(initialTime);
-              soundManager.playGameStart();
-              saveGame();
-            },
+            onPress: confirmAndReset,
           },
         ]
       );
     }
   };
 
-  const undoMove = () => {
+  const performUndo = () => {
     if (vsAI && chess.turn() === 'b') return;
-    
+
     // Undo twice if playing vs AI (undo AI move and player move)
     const undoCount = vsAI ? 2 : 1;
-    
+
     for (let i = 0; i < undoCount; i++) {
       const move = chess.undo();
       if (move) {
@@ -623,12 +617,17 @@ export default function GameScreen() {
         }
       }
     }
-    
+
     setBoard(chess.board());
     setSelectedSquare(null);
     setValidMoves([]);
     setGameStatus('in_progress');
     saveGame();
+  };
+
+  const undoMove = () => {
+    if (vsAI && chess.turn() === 'b') return;
+    handleUndoRequest(performUndo);
   };
 
   const formatTime = (seconds: number): string => {

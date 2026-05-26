@@ -2,14 +2,14 @@
   "expo": {
     "name": "Custom Chess",
     "slug": "custom-chess",
-    "version": "1.0.6",
+    "version": "1.0.8",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "customchess",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "buildNumber": "18",
+      "buildNumber": "21",
       "supportsTablet": true,
       "bundleIdentifier": "com.customchess.app",
       "infoPlist": {
@@ -18,7 +18,7 @@
       }
     },
     "android": {
-      "versionCode": 27,
+      "versionCode": 35,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#1a1a2e"
@@ -27,7 +27,8 @@
       "package": "com.customchess.app",
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE"
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "com.google.android.gms.permission.AD_ID"
       ]
     },
     "web": {
@@ -56,6 +57,13 @@
         "expo-image-picker",
         {
           "photosPermission": "Upload family photos to use as your custom chess pieces"
+        }
+      ],
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-4706498205383777~9079221775",
+          "iosAppId": "ca-app-pub-3940256099942544~1458002511"
         }
       ]
     ],

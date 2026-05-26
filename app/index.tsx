@@ -228,6 +228,43 @@ export default function HomeScreen() {
             <Text style={[styles.menuButtonSecondaryText, { color: '#10B981' }]}>How to Play</Text>
             <Text style={[styles.lockText, { color: '#10B981' }]}>Tutorial</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.menuButtonSecondary, { borderColor: '#EF4444' }]}
+            onPress={() => router.push('/tip-jar')}
+          >
+            <Text style={[styles.menuButtonSecondaryText, { color: '#EF4444' }]}>❤️  Tip Jar</Text>
+            <Text style={[styles.lockText, { color: '#EF4444' }]}>Support the developer</Text>
+          </TouchableOpacity>
+
+          {/* Alien Speed - Premium-gated bonus game */}
+          <TouchableOpacity
+            style={[styles.menuButtonSecondary, { borderColor: '#8B5CF6' }]}
+            onPress={() => {
+              if (isPremium) {
+                router.push('/alien-speed');
+              } else {
+                Alert.alert(
+                  'Premium Feature',
+                  'Alien Speed is unlocked with the Premium upgrade ($4.99 one-time). Premium also includes custom pieces, all themes, and removes ads.',
+                  [
+                    { text: 'Cancel', style: 'cancel' },
+                    {
+                      text: 'Upgrade',
+                      onPress: () => router.push(Platform.OS === 'web' ? '/web-store' : '/store'),
+                    },
+                  ]
+                );
+              }
+            }}
+          >
+            <Text style={[styles.menuButtonSecondaryText, { color: '#8B5CF6' }]}>
+              {isPremium ? '🚀 Alien Speed' : '🔒 Alien Speed'}
+            </Text>
+            <Text style={[styles.lockText, { color: '#8B5CF6' }]}>
+              {isPremium ? 'Bonus Game' : 'Free with Premium • $4.99'}
+            </Text>
+          </TouchableOpacity>
         </View>
 
         {/* Piece Set Selector */}

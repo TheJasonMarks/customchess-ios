@@ -117,7 +117,7 @@ export default function StoreScreen() {
         {renderProduct(
           PRODUCTS.PREMIUM_BUNDLE,
           'Premium Bundle',
-          'All themes, harder AI, custom pieces, letter overlays, no ads',
+          '🚀 Alien Speed bonus game, all themes, harder AI, custom pieces, letter overlays, no ads',
           isPremium,
           true
         )}
@@ -152,6 +152,22 @@ export default function StoreScreen() {
           'Small letters in the corners of your custom pieces',
           false
         )}
+
+        <Text style={styles.sectionTitle}>Support the Developer</Text>
+
+        <TouchableOpacity
+          style={styles.tipJarCard}
+          onPress={() => router.push('/tip-jar')}
+          activeOpacity={0.8}
+        >
+          <View style={styles.productInfo}>
+            <Text style={styles.tipJarTitle}>❤️  Tip Jar</Text>
+            <Text style={styles.productDescription}>
+              One-time tips or monthly support — nothing unlocked, just thanks
+            </Text>
+          </View>
+          <Ionicons name="chevron-forward" size={24} color="#EF4444" />
+        </TouchableOpacity>
 
         <View style={styles.footer} />
       </ScrollView>
@@ -214,6 +230,21 @@ const styles = StyleSheet.create({
   },
   productCardPurchased: {
     opacity: 0.7,
+  },
+  tipJarCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#2d2d44',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 2,
+    borderColor: '#EF4444',
+  },
+  tipJarTitle: {
+    color: '#EF4444',
+    fontSize: 16,
+    fontWeight: '600',
   },
   productInfo: {
     flex: 1,
